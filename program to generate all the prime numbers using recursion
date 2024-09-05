@@ -1,0 +1,20 @@
+def is_prime(num, divisor=None):
+    if divisor is None:
+        divisor = num - 1
+    if num <= 1:
+        return False
+    if divisor == 1:
+        return True
+    if num % divisor == 0:
+        return False
+    return is_prime(num, divisor - 1)
+
+def generate_primes(limit, current=2):
+    if current > limit:
+        return
+    if is_prime(current):
+        print(current, end=' ')
+    generate_primes(limit, current + 1)
+
+limit = int(input("Enter the limit: "))
+generate_primes(limit)
