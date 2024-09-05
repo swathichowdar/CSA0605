@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <math.h>
+
+void constantTimeExample() {
+    int x = 10;
+    int result = x * 2;
+    printf("Result: %d\n", result);
+}
+
+void linearTimeExample(int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", i);
+    }
+    printf("\n");
+}
+
+void quadraticTimeExample(int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("* ");
+        }
+        printf("\n");
+    }
+}
+
+void logarithmicTimeExample(int n) {
+    int count = 0;
+    while (n > 1) {
+        n /= 2;
+        count++;
+    }
+    printf("Number of divisions: %d\n", count);
+}
+
+void linearithmicTimeExample(int n) {
+    for (int i = 1; i <= n; i *= 2) {
+        for (int j = 0; j < n; j++) {
+            printf("* ");
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int n;
+    
+    printf("Enter a number for examples: ");
+    scanf("%d", &n);
+    
+    constantTimeExample();
+    linearTimeExample(n);
+    quadraticTimeExample(n);
+    logarithmicTimeExample(n);
+    linearithmicTimeExample(n);
+    
+    return 0;
+}
