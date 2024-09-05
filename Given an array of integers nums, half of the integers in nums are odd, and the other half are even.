@@ -1,0 +1,17 @@
+def sort_even_odd(nums):
+    evens = []
+    odds = []
+    
+    for num in nums:
+        if num % 2 == 0:
+            evens.append(num)
+        else:
+            odds.append(num)
+    
+    return evens + odds
+
+nums = list(map(int, input("Enter elements separated by spaces: ").split()))
+
+sorted_nums = sort_even_odd(nums)
+
+print("Sorted array with evens first and odds second:", sorted_nums)
