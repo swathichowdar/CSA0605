@@ -1,0 +1,25 @@
+nums = list(map(int, input("Enter elements separated by spaces: ").split()))
+
+evens = []
+odds = []
+
+for num in nums:
+    if num % 2 == 0:
+        evens.append(num)
+    else:
+        odds.append(num)
+
+result = [0] * len(nums)
+
+even_index = 0
+odd_index = 1
+
+for even in evens:
+    result[even_index] = even
+    even_index += 2
+
+for odd in odds:
+    result[odd_index] = odd
+    odd_index += 2
+
+print("Array with evens at even indices and odds at odd indices:", result)
