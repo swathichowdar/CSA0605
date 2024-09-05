@@ -1,0 +1,22 @@
+def median_of_medians(arr, k):
+    if len(arr) <= 5:
+        return sorted(arr)[k]
+
+    sublists = [arr[i:i + 5] for i in range(0, len(arr), 5)]
+    medians = [sorted(sublist)[len(sublist) // 2] for sublist in sublists]
+    median_of_medians = median_of_medians(medians, len(medians) // 2)
+
+    low = [x for x in arr if x < median_of_medians]
+    high = [x for x in arr if x > median_of_medians]
+    k_index = len(low)
+
+    if k < k_index:
+        return median_of_medians(low, k)
+    elif k > k_index:
+        return median_of_medians(high, k - k_index - 1)
+    else:
+        return median_of_medians
+
+arr = [3, 2, 1, 5, 4, 6, 8, 7]
+k = 4
+print("The", k + 1, "th smallest element is:", median_of_medians(arr, k))
