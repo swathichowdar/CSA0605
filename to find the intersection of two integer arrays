@@ -1,0 +1,11 @@
+def intersection(nums1, nums2):
+    result = []
+    for num in nums1:
+        if num in nums2 and num not in result:
+            result.append(num)
+    return result
+
+nums1 = list(map(int, input("Enter elements for nums1 separated by spaces: ").split()))
+nums2 = list(map(int, input("Enter elements for nums2 separated by spaces: ").split()))
+
+print("Intersection:", intersection(nums1, nums2))
