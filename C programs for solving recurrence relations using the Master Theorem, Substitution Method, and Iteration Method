@@ -1,0 +1,15 @@
+#include <stdio.h>
+
+void masterTheoremExample() {
+    printf("Master Theorem Example:\n");
+    printf("T(n) = 2T(n/2) + O(n)\n");
+    printf("Applying the Master Theorem:\n");
+    printf("a = 2, b = 2, f(n) = O(n)\n");
+    printf("Since f(n) = O(n^log_b(a)) where log_b(a) = log_2(2) = 1,\n");
+    printf("f(n) = O(n), so by the Master Theorem, T(n) = O(n^log_b(a)) = O(n)\n");
+}
+
+int main() {
+    masterTheoremExample();
+    return 0;
+}
