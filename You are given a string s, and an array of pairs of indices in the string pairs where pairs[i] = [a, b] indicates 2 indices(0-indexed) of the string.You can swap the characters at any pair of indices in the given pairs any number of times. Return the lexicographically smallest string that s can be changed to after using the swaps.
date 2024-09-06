@@ -1,0 +1,81 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+
+int find(int parent[], int x) {
+    if (parent[x] != x) {
+        parent[x] = find(parent, parent[x]);
+    }
+    return parent[x];
+}
+
+void unionSet(int parent[], int rank[], int x, int y) {
+    int rootX = find(parent, x);
+    int rootY = find(parent, y);
+    if (rootX != rootY) {
+        if (rank[rootX] > rank[rootY]) {
+            parent[rootY] = rootX;
+        } else if (rank[rootX] < rank[rootY]) {
+            parent[rootX] = rootY;
+        } else {
+            parent[rootY] = rootX;
+            rank[rootX]++;
+        }
+    }
+}
+
+void smallestStringWithSwaps(char *s, int pairs[][2], int pairsSize) {
+    int n = strlen(s);
+    int parent[n], rank[n];
+    
+    for (int i = 0; i < n; i++) {
+        parent[i] = i;
+        rank[i] = 0;
+    }
+
+    for (int i = 0; i < pairsSize; i++) {
+        int a = pairs[i][0];
+        int b = pairs[i][1];
+        unionSet(parent, rank, a, b);
+    }
+
+    char components[n][n];
+    int count[n];
+    memset(count, 0, sizeof(count));
+
+    for (int i = 0; i < n; i++) {
+        int root = find(parent, i);
+        components[root][count[root]++] = s[i];
+    }
+
+    for (int i = 0; i < n; i++) {
+        if (count[i] > 0) {
+            for (int j = 0; j < count[i] - 1; j++) {
+                for (int k = j + 1; k < count[i]; k++) {
+                    if (components[i][j] > components[i][k]) {
+                        char temp = components[i][j];
+                        components[i][j] = components[i][k];
+                        components[i][k] = temp;
+                    }
+                }
+            }
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        int root = find(parent, i);
+        s[i] = components[root][--count[root]];
+    }
+}
+
+int main() {
+    char s[] = "dcab";
+    int pairs[][2] = {{0, 3}, {1, 2}};
+    int pairsSize = sizeof(pairs) / sizeof(pairs[0]);
+
+    smallestStringWithSwaps(s, pairs, pairsSize);
+
+    printf("Lexicographically smallest string: %s\n", s);
+
+    return 0;
+}
