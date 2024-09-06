@@ -1,0 +1,31 @@
+def maxSumNonAdjacent(nums):
+    if not nums:
+        return 0
+    if len(nums) == 1:
+        return nums[0]
+    
+    prev1 = nums[0]
+    prev2 = max(nums[0], nums[1])
+    
+    for i in range(2, len(nums)):
+        current = max(prev2, prev1 + nums[i])
+        prev1 = prev2
+        prev2 = current
+    
+    return prev2
+
+def sumOfAnswers(nums, queries):
+    MOD = 10**9 + 7
+    total_sum = 0
+    
+    for pos, x in queries:
+        nums[pos] = x
+        max_sum = maxSumNonAdjacent(nums)
+        total_sum = (total_sum + max_sum) % MOD
+    
+    return total_sum
+
+
+nums = [3, 2, 5, 10, 7]
+queries = [[1, 4], [3, 8]]
+print(sumOfAnswers(nums, queries))  
