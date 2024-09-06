@@ -1,0 +1,19 @@
+import heapq
+
+def kClosest(points, k):
+    max_heap = []
+    
+    for x, y in points:
+        dist = x*x + y*y
+        if len(max_heap) < k:
+            heapq.heappush(max_heap, (-dist, x, y))
+        else:
+            if -max_heap[0][0] > dist:
+                heapq.heappushpop(max_heap, (-dist, x, y))
+    
+    return [(x, y) for (_, x, y) in max_heap]
+
+# Example usage
+points = [[1, 3], [-2, 2], [5, 8], [0, 1]]
+k = 2
+print(kClosest(points, k))  # Output: [[-2, 2], [0, 1]]
