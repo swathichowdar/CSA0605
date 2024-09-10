@@ -41,5 +41,4 @@ nums = [-10, -3, 0, 5, 9]
 
 bst_root = sortedArrayToBST(nums)
 
-# Print the BST in level order
 print(print_level_order(bst_root))
